@@ -1,4 +1,4 @@
-# Introduction to pandas
+# Pandas
 
 Pandas is one of the most popular Python libraries used for:
 
@@ -17,10 +17,15 @@ It helps you work with data in a simple table format like Excel sheets.
 With Pandas you can:
 
 ✅ Read CSV and Excel files
+
 ✅ Filter and clean data
+
 ✅ Analyze large datasets
+
 ✅ Handle missing values
+
 ✅ Sort and group data
+
 ✅ Prepare datasets for AI/ML projects
 
 Companies use it heavily in:
