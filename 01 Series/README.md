@@ -1,7 +1,5 @@
 # Topic 1: Pandas Series
 
----
-
 # What is a Series?
 
 A **Series** is a one-dimensional data structure in Pandas.
