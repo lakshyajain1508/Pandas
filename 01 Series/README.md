@@ -6,13 +6,13 @@ A **Series** is a one-dimensional data structure in Pandas.
 
 It stores:
 
-* Data
-* Index
+- Data
+- Index
 
 Think of it like:
 
-* A single column in Excel
-* A list with labels
+- A single column in Excel
+- A list with labels
 
 ---
 
@@ -21,18 +21,18 @@ Think of it like:
 Suppose you store student marks:
 
 | Index | Marks |
-| ----- | ----- |
-| 0     | 90    |
-| 1     | 85    |
-| 2     | 95    |
+|--------|--------|
+| 0 | 90 |
+| 1 | 85 |
+| 2 | 95 |
 
-This is a Series.
+This is a **Series**.
 
 ---
 
 # Creating Your First Series
 
-```python id="qkhlgf"
+```python
 import pandas as pd
 
 marks = pd.Series([90, 85, 95])
@@ -40,9 +40,9 @@ marks = pd.Series([90, 85, 95])
 print(marks)
 ```
 
-Output:
+### Output
 
-```python id="2v4w3z"
+```text
 0    90
 1    85
 2    95
@@ -53,11 +53,11 @@ dtype: int64
 
 # Understanding Output
 
-| Part     | Meaning   |
-| -------- | --------- |
-| 0,1,2    | Index     |
-| 90,85,95 | Values    |
-| dtype    | Data type |
+| Part | Meaning |
+|--------|---------|
+| 0, 1, 2 | Index |
+| 90, 85, 95 | Values |
+| dtype | Data Type |
 
 ---
 
@@ -76,27 +76,27 @@ Both are important.
 
 ## By Index
 
-```python id="2m8x4u"
+```python
 print(marks[0])
 ```
 
-Output:
+### Output
 
-```python id="0q5f5u"
+```text
 90
 ```
 
 ---
 
-# Multiple Values
+## Multiple Values
 
-```python id="qv5sdp"
+```python
 print(marks[[0, 2]])
 ```
 
-Output:
+### Output
 
-```python id="7gktq9"
+```text
 0    90
 2    95
 ```
@@ -105,9 +105,9 @@ Output:
 
 # Custom Index
 
-Instead of 0,1,2 you can create your own labels.
+Instead of `0, 1, 2`, you can create your own labels.
 
-```python id="8x9nho"
+```python
 marks = pd.Series(
     [90, 85, 95],
     index=["Laksh", "Aryan", "Parth"]
@@ -116,25 +116,26 @@ marks = pd.Series(
 print(marks)
 ```
 
-Output:
+### Output
 
-```python id="7zh5t8"
+```text
 Laksh    90
 Aryan    85
 Parth    95
+dtype: int64
 ```
 
 ---
 
 # Accessing Custom Index Values
 
-```python id="m7q7el"
+```python
 print(marks["Laksh"])
 ```
 
-Output:
+### Output
 
-```python id="0i3bdi"
+```text
 90
 ```
 
@@ -142,7 +143,7 @@ Output:
 
 # Series from Dictionary
 
-```python id="1yq1ov"
+```python
 data = {
     "Laksh": 90,
     "Aryan": 85,
@@ -154,17 +155,26 @@ marks = pd.Series(data)
 print(marks)
 ```
 
+### Output
+
+```text
+Laksh    90
+Aryan    85
+Parth    95
+dtype: int64
+```
+
 ---
 
 # Checking Data Type
 
-```python id="v5c0xa"
+```python
 print(type(marks))
 ```
 
-Output:
+### Output
 
-```python id="3m4zqr"
+```text
 <class 'pandas.core.series.Series'>
 ```
 
@@ -172,13 +182,11 @@ Output:
 
 # Series Attributes
 
----
-
 ## index
 
 Shows indexes.
 
-```python id="n8h1me"
+```python
 print(marks.index)
 ```
 
@@ -188,7 +196,7 @@ print(marks.index)
 
 Shows actual values.
 
-```python id="w7bq7y"
+```python
 print(marks.values)
 ```
 
@@ -198,7 +206,7 @@ print(marks.values)
 
 Shows data type.
 
-```python id="khvj43"
+```python
 print(marks.dtype)
 ```
 
@@ -212,90 +220,101 @@ Pandas supports mathematical operations.
 
 ## Addition
 
-```python id="m20f04"
+```python
 numbers = pd.Series([1, 2, 3])
 
 print(numbers + 10)
 ```
 
-Output:
+### Output
 
-```python id="0b5t9p"
+```text
 0    11
 1    12
 2    13
+dtype: int64
 ```
 
 ---
 
 ## Multiplication
 
-```python id="svryh7"
+```python
 print(numbers * 2)
+```
+
+### Output
+
+```text
+0    2
+1    4
+2    6
+dtype: int64
 ```
 
 ---
 
 # Filtering in Series
 
-```python id="xsvm0u"
+```python
 print(numbers[numbers > 1])
 ```
 
-Output:
+### Output
 
-```python id="s2mx4j"
+```text
 1    2
 2    3
+dtype: int64
 ```
 
 ---
 
 # Checking Missing Values
 
-Pandas uses `NaN` for missing values.
+Pandas uses **NaN** for missing values.
 
-```python id="7l3k0v"
+```python
 data = pd.Series([10, 20, None, 40])
 
 print(data)
 ```
 
-Output:
+### Output
 
-```python id="3w7n1u"
+```text
 0    10.0
 1    20.0
 2     NaN
 3    40.0
+dtype: float64
 ```
 
 ---
 
 # Detect Missing Values
 
-```python id="u0bp0d"
+```python
 print(data.isnull())
 ```
 
-Output:
+### Output
 
-```python id="x6d8c1"
+```text
 0    False
 1    False
 2     True
 3    False
+dtype: bool
 ```
 
 ---
 
 # Basic Functions on Series
 
----
-
 ## sum()
 
-```python id="5rz1wa"
+```python
 print(marks.sum())
 ```
 
@@ -303,7 +322,7 @@ print(marks.sum())
 
 ## mean()
 
-```python id="5tljnd"
+```python
 print(marks.mean())
 ```
 
@@ -311,7 +330,7 @@ print(marks.mean())
 
 ## max()
 
-```python id="kv5zz7"
+```python
 print(marks.max())
 ```
 
@@ -319,7 +338,7 @@ print(marks.max())
 
 ## min()
 
-```python id="e2p7va"
+```python
 print(marks.min())
 ```
 
@@ -327,7 +346,7 @@ print(marks.min())
 
 ## count()
 
-```python id="9yrqqm"
+```python
 print(marks.count())
 ```
 
@@ -335,27 +354,25 @@ print(marks.count())
 
 # Sorting Series
 
----
-
 ## Sort by Values
 
-```python id="pc3q80"
+```python
 print(marks.sort_values())
 ```
 
 ---
 
-## Descending
+## Descending Order
 
-```python id="mvh0ny"
+```python
 print(marks.sort_values(ascending=False))
 ```
 
 ---
 
-# Sorting by Index
+## Sort by Index
 
-```python id="ejzq1x"
+```python
 print(marks.sort_index())
 ```
 
@@ -363,40 +380,41 @@ print(marks.sort_index())
 
 # Checking Conditions
 
-```python id="7v9uhm"
+```python
 print(marks > 90)
 ```
 
-Output:
+### Output
 
-```python id="jlwmn8"
+```text
 Laksh    False
 Aryan    False
 Parth     True
+dtype: bool
 ```
 
 ---
 
-# Real Life Use Cases of Series
+# Real-Life Use Cases of Series
 
 Series are used for:
 
-* Student marks
-* Product prices
-* Daily temperatures
-* Monthly sales
-* Sensor readings
+- Student marks
+- Product prices
+- Daily temperatures
+- Monthly sales
+- Sensor readings
 
 ---
 
 # Difference Between Python List and Series
 
-| Python List       | Pandas Series       |
-| ----------------- | ------------------- |
-| No labels         | Has index           |
-| Basic operations  | Advanced operations |
-| Less powerful     | More powerful       |
-| Limited filtering | Easy filtering      |
+| Python List | Pandas Series |
+|-------------|--------------|
+| No labels | Has index |
+| Basic operations | Advanced operations |
+| Less powerful | More powerful |
+| Limited filtering | Easy filtering |
 
 ---
 
@@ -404,18 +422,82 @@ Series are used for:
 
 ## Q1. What is a Series?
 
-A one-dimensional labeled array in Pandas.
+A **Series** is a one-dimensional labeled array in Pandas that stores data along with an index.
 
 ---
 
-## Q2. Can Series store mixed data?
+## Q2. Can a Series Store Mixed Data Types?
 
-Yes, but not recommended.
+Yes, a Series can store mixed data types, but it is generally **not recommended** because it reduces performance and consistency.
+
+Example:
+
+```python
+mixed = pd.Series([10, "Laksh", 95.5])
+print(mixed)
+```
 
 ---
 
-## Q3. What is index in Series?
+## Q3. What is an Index in a Series?
 
-Labels used to identify values.
+An **Index** is a label used to identify and access values stored in a Series.
+
+Example:
+
+```python
+marks = pd.Series(
+    [90, 85, 95],
+    index=["Laksh", "Aryan", "Parth"]
+)
+
+print(marks["Laksh"])
+```
+
+Output:
+
+```text
+90
+```
 
 ---
+
+# Summary
+
+You learned:
+
+✅ What is a Series
+
+✅ Creating a Series
+
+✅ Series from Lists
+
+✅ Series from Dictionaries
+
+✅ Custom Indexes
+
+✅ Accessing Values
+
+✅ Series Attributes (`index`, `values`, `dtype`)
+
+✅ Mathematical Operations
+
+✅ Filtering Data
+
+✅ Missing Values (`NaN`)
+
+✅ Basic Statistical Functions
+
+✅ Sorting
+
+✅ Conditions and Boolean Operations
+
+✅ Real-World Use Cases
+
+✅ Interview Questions
+
+---
+
+# Key Takeaway
+
+A **Series** is the foundation of Pandas. Every column in a DataFrame is internally stored as a Series. Understanding Series thoroughly makes learning DataFrames, data analysis, and machine learning preprocessing much easier.
