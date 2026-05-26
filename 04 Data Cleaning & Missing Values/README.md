@@ -1,51 +1,47 @@
 # Topic 4: Data Cleaning & Missing Values in pandas
 
-## Easy Explanation + Practical Coding
+## Why Data Cleaning is Important
 
----
-
-# Why Data Cleaning is Important
-
-Real-world datasets are NEVER perfect.
+Real-world datasets are **never perfect**.
 
 They usually contain:
 
-* Missing values
-* Wrong spellings
-* Duplicate rows
-* Empty cells
-* Incorrect formats
+- Missing values
+- Wrong spellings
+- Duplicate rows
+- Empty cells
+- Incorrect formats
 
 Before analysis or AI/ML:
 
-## Data MUST be cleaned.
+> **Data must be cleaned.**
 
 ---
 
-# Real Life Example
+## Real Life Example
 
 Imagine student data:
 
 | Name  | Age        | Marks |
-| ----- | ---------- | ----- |
-| Laksh | 20         | 90    |
-| Aryan | NaN        | 85    |
-| Laksh | 20         | 90    |
-| Parth | twenty two | NaN   |
+| ------ | ---------- | ------ |
+| Laksh | 20 | 90 |
+| Aryan | NaN | 85 |
+| Laksh | 20 | 90 |
+| Parth | twenty two | NaN |
 
-Problems:
+### Problems
 
-* Missing values
-* Duplicate row
-* Wrong datatype
+- Missing values
+- Duplicate row
+- Wrong datatype
 
-This is very common.
+This is very common in real-world datasets.
 
 ---
 
-# Create Sample Dataset
+## Create Sample Dataset
 
-```python id="nltjlwm"
+```python
 import pandas as pd
 import numpy as np
 
@@ -61,9 +57,9 @@ df = pd.DataFrame(data)
 print(df)
 ```
 
-Output:
+### Output
 
-```python id="jlwmr1"
+```text
      Name          Age  Marks    City
 0   Laksh           20   90.0  Mumbai
 1   Aryan          NaN   85.0    Pune
@@ -77,27 +73,26 @@ Output:
 
 Missing values are shown as:
 
-```text id="jlwmr2"
+```text
 NaN
 ```
 
-Meaning:
+### Meaning
 
-## Not a Number
-
-or empty value.
+- Not a Number
+- Empty value
 
 ---
 
-# Detect Missing Values
+## Detect Missing Values
 
-```python id="jlwmr3"
+```python
 print(df.isnull())
 ```
 
-Output:
+### Output
 
-```python id="jlwmr4"
+```text
     Name    Age  Marks   City
 0  False  False  False  False
 1  False   True  False  False
@@ -105,100 +100,96 @@ Output:
 3  False  False   True   True
 ```
 
-Explanation:
+### Explanation
 
-* `True` means missing value exists.
+- `True` means a missing value exists.
 
 ---
 
-# Count Missing Values
+## Count Missing Values
 
-```python id="jlwmr5"
+```python
 print(df.isnull().sum())
 ```
 
-Output:
+### Output
 
-```python id="jlwmr6"
+```text
 Name     0
 Age      1
 Marks    1
 City     1
 ```
 
-Explanation:
+### Explanation
 
-* Age has 1 missing value
-* Marks has 1 missing value
-* City has 1 missing value
+- Age has 1 missing value
+- Marks has 1 missing value
+- City has 1 missing value
 
 ---
 
 # 2. Remove Missing Values
 
----
+## Drop Rows with Missing Values
 
-# Drop Rows with Missing Values
-
-```python id="jlwmr7"
+```python
 print(df.dropna())
 ```
 
-Output:
+### Output
 
-```python id="jlwmr8"
+```text
     Name Age  Marks    City
 0  Laksh  20   90.0  Mumbai
 2  Laksh  20   90.0  Mumbai
 ```
 
-Explanation:
+### Explanation
 
-* Rows with missing values removed.
+Rows containing missing values are removed.
 
 ---
 
-# IMPORTANT
+## Important
 
-`dropna()` does NOT change original DataFrame unless:
+`dropna()` does **not** change the original DataFrame unless:
 
-```python id="jlwmr9"
+```python
 df.dropna(inplace=True)
 ```
 
 ---
 
-# Drop Columns with Missing Values
+## Drop Columns with Missing Values
 
-```python id="jlwmra"
+```python
 print(df.dropna(axis=1))
 ```
 
-Explanation:
+### Explanation
 
-* `axis=1` means columns.
+- `axis=1` means columns.
 
 ---
 
 # 3. Fill Missing Values
 
-Sometimes deleting data is bad.
+Sometimes deleting data is not a good idea.
 
-Instead:
-
-## Fill missing values.
+Instead, fill missing values.
 
 ---
 
-# Fill with Zero
+## Fill with Zero
 
-```python id="jlwmrb"
+```python
 print(df.fillna(0))
 ```
 
-Output:
+### Output
 
-```python id="jlwmrc"
+```text
      Name          Age  Marks    City
 0   Laksh           20   90.0  Mumbai
 1   Aryan            0   85.0    Pune
@@ -208,9 +199,9 @@ Output:
 
 ---
 
-# Fill Specific Column
+## Fill Specific Column
 
-```python id="jlwmrd"
+```python
 df["Marks"] = df["Marks"].fillna(50)
 
 print(df)
@@ -218,57 +209,53 @@ print(df)
 
 ---
 
-# Fill with Mean
+## Fill with Mean
 
-Very common in data science.
+Very common in Data Science.
 
----
-
-# Example
-
-```python id="jlwmre"
+```python
 df["Marks"] = df["Marks"].fillna(df["Marks"].mean())
 
 print(df)
 ```
 
-Explanation:
+### Explanation
 
-* Missing marks replaced by average marks.
+Missing marks are replaced by the average marks.
 
 ---
 
-# Fill with Median
+## Fill with Median
 
-```python id="jlwmrf"
+```python
 df["Marks"] = df["Marks"].fillna(df["Marks"].median())
 ```
 
 ---
 
-# Fill with Mode
+## Fill with Mode
 
-```python id="jlwmrg"
+```python
 df["City"] = df["City"].fillna(df["City"].mode()[0])
 ```
 
 ---
 
-# Forward Fill
+## Forward Fill
 
-Uses previous value.
+Uses the previous value.
 
-```python id="jlwmrh"
+```python
 print(df.fillna(method="ffill"))
 ```
 
 ---
 
-# Backward Fill
+## Backward Fill
 
-Uses next value.
+Uses the next value.
 
-```python id="jlwmri"
+```python
 print(df.fillna(method="bfill"))
 ```
 
@@ -280,46 +267,46 @@ Duplicate rows are very common.
 
 ---
 
-# Detect Duplicates
+## Detect Duplicates
 
-```python id="jlwmrj"
+```python
 print(df.duplicated())
 ```
 
-Output:
+### Output
 
-```python id="jlwmrk"
+```text
 0    False
 1    False
 2     True
 3    False
 ```
 
-Explanation:
+### Explanation
 
-* Row 2 is duplicate.
+Row 2 is a duplicate.
 
 ---
 
-# Remove Duplicates
+## Remove Duplicates
 
-```python id="jlwmrl"
+```python
 print(df.drop_duplicates())
 ```
 
 ---
 
-# Remove Duplicates Permanently
+## Remove Duplicates Permanently
 
-```python id="jlwmrm"
+```python
 df.drop_duplicates(inplace=True)
 ```
 
 ---
 
-# Remove Duplicate Based on One Column
+## Remove Duplicates Based on One Column
 
-```python id="jlwmrn"
+```python
 print(df.drop_duplicates(subset=["Name"]))
 ```
 
@@ -331,53 +318,49 @@ Very important in cleaning.
 
 ---
 
-# Check Data Types
+## Check Data Types
 
-```python id="jlwmro"
+```python
 print(df.dtypes)
 ```
 
 ---
 
-# Convert Column Type
+## Convert to Integer
 
----
-
-# Convert to Integer
-
-```python id="分快三1"
+```python
 df["Marks"] = df["Marks"].astype(int)
 ```
 
 ---
 
-# Convert to Float
+## Convert to Float
 
-```python id="分快三2"
+```python
 df["Marks"] = df["Marks"].astype(float)
 ```
 
 ---
 
-# Convert to String
+## Convert to String
 
-```python id="分快三3"
+```python
 df["Age"] = df["Age"].astype(str)
 ```
 
 ---
 
-# Problem Example
+## Problem Example
 
 This will fail:
 
-```python id="分快三4"
+```python
 df["Age"] = df["Age"].astype(int)
 ```
 
-Because:
+### Because
 
-```text id="分快三5"
+```text
 twenty two
 ```
 
@@ -385,31 +368,29 @@ is not numeric.
 
 ---
 
-# Fix Wrong Data
+## Fix Wrong Data
 
----
+### Replace Wrong Values
 
-# Replace Wrong Values
-
-```python id="分快三6"
+```python
 df["Age"] = df["Age"].replace("twenty two", 22)
 
 print(df)
 ```
 
-Now conversion works.
+Now conversion works correctly.
 
 ---
 
 # 6. String Cleaning
 
-Real datasets contain messy text.
+Real datasets often contain messy text.
 
 ---
 
-# Example Dataset
+## Example Dataset
 
-```python id="分快三7"
+```python
 df = pd.DataFrame({
     "Name": [" Laksh ", "ARYAN", "parth"]
 })
@@ -419,41 +400,41 @@ print(df)
 
 ---
 
-# Remove Spaces
+## Remove Spaces
 
-```python id="分快三8"
+```python
 df["Name"] = df["Name"].str.strip()
 ```
 
 ---
 
-# Convert to Lowercase
+## Convert to Lowercase
 
-```python id="分快三9"
+```python
 df["Name"] = df["Name"].str.lower()
 ```
 
 ---
 
-# Convert to Uppercase
+## Convert to Uppercase
 
-```python id="分快三10"
+```python
 df["Name"] = df["Name"].str.upper()
 ```
 
 ---
 
-# Capitalize Text
+## Capitalize Text
 
-```python id="分快三11"
+```python
 df["Name"] = df["Name"].str.title()
 ```
 
 ---
 
-# Replace Text
+## Replace Text
 
-```python id="分快三12"
+```python
 df["Name"] = df["Name"].str.replace("Laksh", "Lakshya")
 ```
 
@@ -461,19 +442,17 @@ df["Name"] = df["Name"].str.replace("Laksh", "Lakshya")
 
 # 7. Rename Columns
 
----
+## Rename One Column
 
-# Rename One Column
-
-```python id="分快三13"
+```python
 df.rename(columns={"Marks": "Score"}, inplace=True)
 ```
 
 ---
 
-# Rename Multiple Columns
+## Rename Multiple Columns
 
-```python id="分快三14"
+```python
 df.rename(
     columns={
         "Marks": "Score",
@@ -487,19 +466,17 @@ df.rename(
 
 # 8. Remove Columns
 
----
+## Remove Single Column
 
-# Remove Single Column
-
-```python id="分快三15"
+```python
 df.drop("City", axis=1, inplace=True)
 ```
 
 ---
 
-# Remove Multiple Columns
+## Remove Multiple Columns
 
-```python id="分快三16"
+```python
 df.drop(
     ["City", "Age"],
     axis=1,
@@ -511,17 +488,17 @@ df.drop(
 
 # 9. Detect Outliers (Basic)
 
-Outliers = abnormal values.
+Outliers are abnormal values.
 
-Example:
+### Example
 
-* Marks = 9999
+- Marks = 9999
 
 ---
 
-# Find Large Values
+## Find Large Values
 
-```python id="分快三17"
+```python
 print(df[df["Marks"] > 100])
 ```
 
@@ -529,97 +506,94 @@ print(df[df["Marks"] > 100])
 
 # 10. Useful Cleaning Functions
 
-| Function            | Purpose           |
-| ------------------- | ----------------- |
-| `isnull()`          | Detect missing    |
-| `dropna()`          | Remove missing    |
-| `fillna()`          | Fill missing      |
-| `duplicated()`      | Detect duplicates |
+| Function | Purpose |
+|-----------|---------|
+| `isnull()` | Detect missing values |
+| `dropna()` | Remove missing values |
+| `fillna()` | Fill missing values |
+| `duplicated()` | Detect duplicates |
 | `drop_duplicates()` | Remove duplicates |
-| `astype()`          | Change datatype   |
-| `replace()`         | Replace values    |
+| `astype()` | Change datatype |
+| `replace()` | Replace values |
 
 ---
 
 # Real Workflow Example
 
-Professional analysts usually:
+Professional analysts usually follow these steps.
 
 ---
 
-# Step 1
+## Step 1: Read Data
 
-Read data
-
-```python id="分快三18"
+```python
 df = pd.read_csv("students.csv")
 ```
 
 ---
 
-# Step 2
+## Step 2: Check Missing Values
 
-Check missing values
-
-```python id="分快三19"
+```python
 print(df.isnull().sum())
 ```
 
 ---
 
-# Step 3
+## Step 3: Remove Duplicates
 
-Remove duplicates
-
-```python id="分快三20"
+```python
 df.drop_duplicates(inplace=True)
 ```
 
 ---
 
-# Step 4
+## Step 4: Fix Missing Values
 
-Fix missing values
-
-```python id="分快三21"
+```python
 df.fillna(0, inplace=True)
 ```
 
 ---
 
-# Step 5
+## Step 5: Fix Text Formatting
 
-Fix text formatting
-
-```python id="分快三22"
+```python
 df["Name"] = df["Name"].str.title()
 ```
 
 ---
 
-# Step 6
+## Step 6: Save Cleaned Dataset
 
-Save cleaned dataset
-
-```python id="分快三23"
+```python
 df.to_csv("cleaned_data.csv", index=False)
 ```
 
 ---
+
 # Summary
 
 You learned:
 
 ✅ Missing values
-✅ isnull()
-✅ dropna()
-✅ fillna()
+
+✅ `isnull()`
+
+✅ `dropna()`
+
+✅ `fillna()`
+
 ✅ Duplicate removal
+
 ✅ String cleaning
+
 ✅ Data type conversion
+
 ✅ Column renaming
+
 ✅ Removing columns
-✅ Real cleaning workflow
+
+✅ Real data cleaning workflow
 
 ---
-
