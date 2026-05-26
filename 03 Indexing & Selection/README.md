@@ -1,14 +1,14 @@
 # Topic 3: Indexing & Selection Mastery in pandas
 
-This is one of the MOST important topics in Pandas.
+This is one of the **most important topics** in Pandas.
 
-Why?
+### Why?
 
 Because in real-world data analysis:
 
-* 70% work = selecting correct data
-* Analysts constantly filter rows & columns
-* Machine learning preprocessing depends on selection
+- 70% of the work involves selecting the correct data
+- Analysts constantly filter rows and columns
+- Machine Learning preprocessing depends heavily on data selection
 
 If you master indexing, Pandas becomes much easier.
 
@@ -18,14 +18,14 @@ If you master indexing, Pandas becomes much easier.
 
 Indexing means:
 
-## Accessing specific data from a DataFrame or Series.
+> Accessing specific data from a DataFrame or Series.
 
-Example:
+### Examples
 
-* Select rows
-* Select columns
-* Select ranges
-* Filter conditions
+- Select rows
+- Select columns
+- Select ranges
+- Filter data using conditions
 
 ---
 
@@ -33,20 +33,20 @@ Example:
 
 There are mainly 4 methods:
 
-| Method          | Purpose                  |
-| --------------- | ------------------------ |
-| `[]`            | Basic selection          |
-| `loc[]`         | Label-based selection    |
-| `iloc[]`        | Position-based selection |
-| Boolean Masking | Conditional filtering    |
+| Method | Purpose |
+|----------|----------|
+| `[]` | Basic selection |
+| `loc[]` | Label-based selection |
+| `iloc[]` | Position-based selection |
+| Boolean Masking | Conditional filtering |
 
 ---
 
 # Sample DataFrame
 
-We use this throughout:
+We will use this DataFrame throughout the chapter.
 
-```python id="oz0zjk"
+```python
 import pandas as pd
 
 df = pd.DataFrame({
@@ -59,67 +59,65 @@ df = pd.DataFrame({
 print(df)
 ```
 
-Output:
+### Output
 
-```python id="s7bjlwm"
-     Name   Age   Marks    City
-0   Laksh   20      90   Mumbai
-1   Aryan   21      85   Pune
-2   Parth   22      95   Delhi
-3    Riya   19      88   Mumbai
+```text
+     Name   Age  Marks    City
+0   Laksh   20     90   Mumbai
+1   Aryan   21     85     Pune
+2   Parth   22     95    Delhi
+3    Riya   19     88   Mumbai
 ```
 
 ---
 
 # 1. Basic Selection Using `[]`
 
----
+## Select Single Column
 
-# Select Single Column
-
-```python id="jlwm3h"
+```python
 df["Name"]
 ```
 
-Output:
+### Output
 
-```python id="2u8i6p"
+```text
 0    Laksh
 1    Aryan
 2    Parth
 3     Riya
 ```
 
-Type returned:
+### Type Returned
 
-## Series
+**Series**
 
 ---
 
-# Select Multiple Columns
+## Select Multiple Columns
 
-```python id="jlwm8u"
+```python
 df[["Name", "Marks"]]
 ```
 
-Type returned:
+### Type Returned
 
-## DataFrame
+**DataFrame**
 
 ---
 
-# Important Difference
+## Important Difference
 
-| Syntax         | Result    |
-| -------------- | --------- |
-| `df["Name"]`   | Series    |
+| Syntax | Result |
+|----------|----------|
+| `df["Name"]` | Series |
 | `df[["Name"]]` | DataFrame |
 
 ---
 
-# Column Selection Internally
+## Column Selection Internally
 
-```text id="d6zkwn"
+```text
 df["Name"]
    ↓
 Search column label
@@ -129,29 +127,29 @@ Return Series
 
 ---
 
-# 2. loc[] (Label-Based Selection)
+# 2. `loc[]` (Label-Based Selection)
 
-One of the MOST used functions.
+One of the most used functions in Pandas.
 
 ---
 
-# Syntax
+## Syntax
 
-```python id="jlwm0v"
+```python
 df.loc[row_labels, column_labels]
 ```
 
 ---
 
-# Select Single Row
+## Select Single Row
 
-```python id="jlwmf1"
+```python
 df.loc[0]
 ```
 
-Output:
+### Output
 
-```python id="jlwm4t"
+```text
 Name       Laksh
 Age           20
 Marks         90
@@ -160,72 +158,75 @@ City      Mumbai
 
 ---
 
-# Select Multiple Rows
+## Select Multiple Rows
 
-```python id="9m12ht"
+```python
 df.loc[[0, 2]]
 ```
 
 ---
 
-# Select Specific Rows & Columns
+## Select Specific Rows and Columns
 
-```python id="jlwm3x"
+```python
 df.loc[[0, 2], ["Name", "Marks"]]
 ```
 
-Output:
+### Output
 
-```python id="jlwmc9"
-    Name   Marks
+```text
+    Name  Marks
 0  Laksh     90
 2  Parth     95
 ```
 
 ---
 
-# Select Range Using loc[]
+## Select Range Using `loc[]`
 
-```python id="jlwm6b"
+```python
 df.loc[0:2]
 ```
 
-IMPORTANT:
+### Important
 
-## loc includes ending index.
+`loc[]` includes the ending index.
 
-Result:
-Rows 0,1,2 included.
+Result includes:
+
+```text
+0, 1, 2
+```
 
 ---
 
-# Conditional Selection with loc[]
+## Conditional Selection with `loc[]`
 
-```python id="jlwm9a"
+```python
 df.loc[df["Marks"] > 90]
 ```
 
 ---
 
-# Modify Values Using loc[]
+## Modify Values Using `loc[]`
 
-```python id="4yjlwm"
+```python
 df.loc[0, "Marks"] = 99
 ```
 
 ---
 
-# Multiple Updates
+## Multiple Updates
 
-```python id="jlwm4o"
+```python
 df.loc[df["City"] == "Mumbai", "Marks"] = 100
 ```
 
 ---
 
-# Custom Index with loc[]
+## Custom Index with `loc[]`
 
-```python id="jlwm2k"
+```python
 df.index = ["a", "b", "c", "d"]
 
 print(df)
@@ -233,163 +234,170 @@ print(df)
 
 Now:
 
-```python id="3jlwmf"
+```python
 df.loc["a"]
 ```
 
 ---
 
-# 3. iloc[] (Position-Based Selection)
+# 3. `iloc[]` (Position-Based Selection)
 
-iloc uses:
-
-## Integer positions
+`iloc[]` uses integer positions.
 
 ---
 
-# Syntax
+## Syntax
 
-```python id="jlwm4n"
+```python
 df.iloc[row_positions, column_positions]
 ```
 
 ---
 
-# Select First Row
+## Select First Row
 
-```python id="3zjlwm"
+```python
 df.iloc[0]
 ```
 
 ---
 
-# Select Multiple Rows
+## Select Multiple Rows
 
-```python id="jlwm7s"
+```python
 df.iloc[[0, 2]]
 ```
 
 ---
 
-# Select Specific Rows & Columns
+## Select Specific Rows and Columns
 
-```python id="4jlwmz"
+```python
 df.iloc[[0, 2], [0, 2]]
 ```
 
-Output:
+### Output
 
-```python id="jlwm5j"
-    Name   Marks
+```text
+    Name  Marks
 0  Laksh     90
 2  Parth     95
 ```
 
 ---
 
-# Range Selection
+## Range Selection
 
-```python id="6jlwmk"
+```python
 df.iloc[0:2]
 ```
 
-IMPORTANT:
+### Important
 
-## iloc excludes ending index.
+`iloc[]` excludes the ending index.
 
 Returns:
-Rows 0 and 1 only.
+
+```text
+0, 1
+```
 
 ---
 
-# loc vs iloc (VERY IMPORTANT)
+# `loc[]` vs `iloc[]` (Very Important)
 
-| loc[]               | iloc[]                |
-| ------------------- | --------------------- |
-| Label-based         | Position-based        |
-| Includes stop index | Excludes stop index   |
-| Uses column names   | Uses column positions |
-
----
-
-# Example Comparison
+| `loc[]` | `iloc[]` |
+|----------|----------|
+| Label-based | Position-based |
+| Includes stop index | Excludes stop index |
+| Uses column names | Uses column positions |
 
 ---
 
-# loc
+## Example Comparison
 
-```python id="7jlwmn"
+### loc
+
+```python
 df.loc[0:2]
 ```
 
 Returns:
-0,1,2
+
+```text
+0, 1, 2
+```
 
 ---
 
-# iloc
+### iloc
 
-```python id="jlwm1f"
+```python
 df.iloc[0:2]
 ```
 
 Returns:
-0,1
+
+```text
+0, 1
+```
 
 ---
 
-# 4. Boolean Masking (SUPER IMPORTANT)
+# 4. Boolean Masking (Super Important)
 
 Used heavily in:
 
-* Data analysis
-* Machine learning
-* Dashboards
+- Data Analysis
+- Machine Learning
+- Dashboards
 
 ---
 
-# Basic Condition
+## Basic Condition
 
-```python id="jlwm8n"
+```python
 df["Marks"] > 90
 ```
 
-Output:
+### Output
 
-```python id="zjlwmq"
+```text
 0    False
 1    False
 2     True
 3    False
 ```
 
-This is called:
+This is called a:
 
-## Boolean Mask
+> Boolean Mask
 
 ---
 
-# Using Boolean Mask
+## Using Boolean Mask
 
-```python id="jlwm2n"
+```python
 df[df["Marks"] > 90]
 ```
 
 ---
 
-# Multiple Conditions
+## Multiple Conditions
 
 Use:
 
-* `&` → AND
-* `|` → OR
-* `~` → NOT
+| Operator | Meaning |
+|-----------|---------|
+| `&` | AND |
+| `|` | OR |
+| `~` | NOT |
 
 ---
 
-# AND Condition
+## AND Condition
 
-```python id="jlwm9o"
+```python
 df[
     (df["Marks"] > 85) &
     (df["Age"] > 20)
@@ -398,9 +406,9 @@ df[
 
 ---
 
-# OR Condition
+## OR Condition
 
-```python id="jlwm6s"
+```python
 df[
     (df["City"] == "Mumbai") |
     (df["Marks"] > 90)
@@ -409,9 +417,9 @@ df[
 
 ---
 
-# NOT Condition
+## NOT Condition
 
-```python id="jlwm7v"
+```python
 df[
     ~(df["City"] == "Mumbai")
 ]
@@ -419,43 +427,39 @@ df[
 
 ---
 
-# IMPORTANT RULE
+## Important Rule
 
 Always wrap conditions in brackets.
 
-Correct:
+### Correct
 
-```python id="8jlwmx"
+```python
 (df["Marks"] > 90)
 ```
 
-Wrong:
+### Wrong (inside combined conditions)
 
-```python id="9jlwmw"
+```python
 df["Marks"] > 90
 ```
 
-inside combined conditions.
-
 ---
 
-# isin() Function
+# `isin()` Function
 
 Used to check multiple values.
 
----
+### Example
 
-# Example
-
-```python id="5jlwmc"
+```python
 df[df["City"].isin(["Mumbai", "Delhi"])]
 ```
 
 ---
 
-# between() Function
+# `between()` Function
 
-```python id="4jlwmr"
+```python
 df[df["Marks"].between(85, 95)]
 ```
 
@@ -465,65 +469,63 @@ df[df["Marks"].between(85, 95)]
 
 ---
 
-# contains()
+## `contains()`
 
-```python id="2jlwmm"
+```python
 df[df["Name"].str.contains("a")]
 ```
 
 ---
 
-# startswith()
+## `startswith()`
 
-```python id="1jlwmz"
+```python
 df[df["Name"].str.startswith("L")]
 ```
 
 ---
 
-# endswith()
+## `endswith()`
 
-```python id="0jlwmv"
+```python
 df[df["Name"].str.endswith("h")]
 ```
 
 ---
 
-# query() Method
+# `query()` Method
 
-Cleaner filtering syntax.
+Provides a cleaner filtering syntax.
 
----
+### Example
 
-# Example
-
-```python id="jlwm5l"
+```python
 df.query("Marks > 90")
 ```
 
 ---
 
-# Multiple Conditions
+## Multiple Conditions
 
-```python id="3jlwmu"
+```python
 df.query("Marks > 85 and Age > 20")
 ```
 
 ---
 
-# Why query() is Useful
+## Why `query()` is Useful
 
 Cleaner for:
 
-* Large conditions
-* Readability
-* Analytics scripts
+- Large conditions
+- Better readability
+- Analytics scripts
 
 ---
 
 # Selecting Random Rows
 
-```python id="7jlwml"
+```python
 df.sample(2)
 ```
 
@@ -531,7 +533,7 @@ df.sample(2)
 
 # Selecting Top Rows
 
-```python id="9jlwmp"
+```python
 df.head(2)
 ```
 
@@ -539,7 +541,7 @@ df.head(2)
 
 # Selecting Last Rows
 
-```python id="8jlwmt"
+```python
 df.tail(2)
 ```
 
@@ -547,27 +549,25 @@ df.tail(2)
 
 # Index Manipulation
 
----
+## Set Custom Index
 
-# Set Custom Index
-
-```python id="6jlwmu"
+```python
 df.set_index("Name", inplace=True)
 ```
 
 ---
 
-# Access with New Index
+## Access with New Index
 
-```python id="5jlwmx"
+```python
 df.loc["Laksh"]
 ```
 
 ---
 
-# Reset Index
+## Reset Index
 
-```python id="4jlwmq"
+```python
 df.reset_index(inplace=True)
 ```
 
@@ -579,26 +579,26 @@ Advanced indexing system.
 
 ---
 
-# Example
+## Example
 
-```python id="2jlwmw"
+```python
 df.set_index(["City", "Name"], inplace=True)
 ```
 
-Output:
+### Output
 
-```text id="1jlwmh"
-                 Age   Marks
+```text
+                 Age  Marks
 City    Name
-Mumbai Laksh   20      90
-Pune    Aryan  21      85
+Mumbai  Laksh   20     90
+Pune    Aryan   21     85
 ```
 
 ---
 
-# Access MultiIndex
+## Access MultiIndex
 
-```python id="0jlwmk"
+```python
 df.loc["Mumbai"]
 ```
 
@@ -610,25 +610,24 @@ Very important issue.
 
 ---
 
-# Problem Example
+## Problem Example
 
-```python id="zjlwmv"
+```python
 filtered = df[df["Marks"] > 90]
 ```
 
-Sometimes this creates:
+Sometimes this creates either:
 
-* Copy
-  OR
-* View
+- Copy
+- View
 
-This can cause warnings.
+This can generate warnings.
 
 ---
 
-# Safe Way
+## Safe Way
 
-```python id="yjlwmm"
+```python
 filtered = df[df["Marks"] > 90].copy()
 ```
 
@@ -636,15 +635,15 @@ filtered = df[df["Marks"] > 90].copy()
 
 # Chained Indexing Problem
 
-BAD:
+### Bad
 
-```python id="xjlwmj"
+```python
 df[df["Marks"] > 90]["Age"]
 ```
 
-Better:
+### Better
 
-```python id="wjlwmn"
+```python
 df.loc[df["Marks"] > 90, "Age"]
 ```
 
@@ -652,59 +651,84 @@ df.loc[df["Marks"] > 90, "Age"]
 
 # Performance Tips
 
----
+## Fastest Selection
 
-# Fastest Selection
-
-```python id="vjlwms"
+```python
 df.loc[]
 ```
 
-preferred over loops.
+Preferred over loops.
 
 ---
 
-# Avoid iterrows()
+## Avoid `iterrows()`
 
 Slow:
 
-```python id="ujlwmx"
+```python
 for index, row in df.iterrows():
     pass
 ```
 
 ---
 
-# Use Vectorization
+## Use Vectorization
 
 Fast:
 
-```python id="tjlwmv"
+```python
 df["Marks"] + 5
 ```
 
 ---
 
-# Real World Use Cases
+# Real-World Use Cases
 
 Indexing is used for:
 
-* Finding top students
-* Filtering customers
-* Fraud detection
-* Sales analysis
-* Stock market analysis
+- Finding top students
+- Filtering customers
+- Fraud detection
+- Sales analysis
+- Stock market analysis
 
 ---
 
 # Most Important Concepts to Master
 
-✅ loc[]
-✅ iloc[]
-✅ Boolean masking
-✅ query()
+✅ `loc[]`
+
+✅ `iloc[]`
+
+✅ Boolean Masking
+
+✅ `query()`
+
 ✅ Multi-condition filtering
+
 ✅ Index manipulation
-✅ isin()
+
+✅ `isin()`
+
 ✅ String filtering
+
 ✅ Copy vs View
+
+---
+
+# Summary
+
+In this chapter, you learned:
+
+- Basic column selection using `[]`
+- Label-based selection with `loc[]`
+- Position-based selection with `iloc[]`
+- Boolean masking and conditional filtering
+- String-based filtering
+- `isin()` and `between()`
+- Query-based filtering
+- Index manipulation and MultiIndex
+- Copy vs View issues
+- Performance optimization techniques
+
+Mastering these concepts is essential for efficient data analysis, data cleaning, feature engineering, and machine learning workflows using Pandas.
