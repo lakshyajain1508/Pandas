@@ -6,24 +6,24 @@ A **DataFrame** is a two-dimensional data structure in Pandas.
 
 It looks like a table with:
 
-* Rows
-* Columns
+- Rows
+- Columns
 
 Think of it like:
 
-* Excel sheet
-* SQL table
-* Google Sheets
+- Excel sheet
+- SQL table
+- Google Sheets
 
 ---
 
 # Real Life Example
 
-| Name  | Age | Marks |
-| ----- | --- | ----- |
-| Laksh | 20  | 90    |
-| Aryan | 21  | 85    |
-| Parth | 22  | 95    |
+| Name | Age | Marks |
+|------|-----|-------|
+| Laksh | 20 | 90 |
+| Aryan | 21 | 85 |
+| Parth | 22 | 95 |
 
 This entire table is called a **DataFrame**.
 
@@ -35,11 +35,11 @@ Almost all real-world data analysis is done using DataFrames.
 
 Examples:
 
-* Student databases
-* Sales reports
-* IPL statistics
-* Netflix datasets
-* Customer records
+- Student databases
+- Sales reports
+- IPL statistics
+- Netflix datasets
+- Customer records
 
 ---
 
@@ -55,7 +55,7 @@ A DataFrame contains:
 
 # Creating Your First DataFrame
 
-```python id="gxjlwm"
+```python
 import pandas as pd
 
 data = {
@@ -69,24 +69,24 @@ df = pd.DataFrame(data)
 print(df)
 ```
 
-Output:
+### Output
 
-```python id="w2b9yq"
-    Name   Age   Marks
-0  Laksh   20      90
-1  Aryan   21      85
-2  Parth   22      95
+```text
+    Name   Age  Marks
+0  Laksh   20     90
+1  Aryan   21     85
+2  Parth   22     95
 ```
 
 ---
 
 # Understanding Output
 
-| Part             | Meaning     |
-| ---------------- | ----------- |
-| 0,1,2            | Row indexes |
-| Name, Age, Marks | Columns     |
-| Laksh, 20, 90    | Data        |
+| Part | Meaning |
+|--------|---------|
+| 0,1,2 | Row indexes |
+| Name, Age, Marks | Columns |
+| Laksh, 20, 90 | Data |
 
 ---
 
@@ -100,13 +100,13 @@ Each column is internally a Series.
 
 # Checking Data Type
 
-```python id="g4m9wr"
+```python
 print(type(df))
 ```
 
-Output:
+### Output
 
-```python id="b4g18k"
+```text
 <class 'pandas.core.frame.DataFrame'>
 ```
 
@@ -114,27 +114,28 @@ Output:
 
 # DataFrame Attributes
 
----
-
 ## shape
 
 Shows:
-(rows, columns)
 
-```python id="3oh0b9"
+```text
+(rows, columns)
+```
+
+```python
 print(df.shape)
 ```
 
-Output:
+### Output
 
-```python id="grsl1r"
+```text
 (3, 3)
 ```
 
 Meaning:
 
-* 3 rows
-* 3 columns
+- 3 rows
+- 3 columns
 
 ---
 
@@ -142,7 +143,7 @@ Meaning:
 
 Shows column names.
 
-```python id="7rfu1m"
+```python
 print(df.columns)
 ```
 
@@ -152,7 +153,7 @@ print(df.columns)
 
 Shows row indexes.
 
-```python id="n3e7a1"
+```python
 print(df.index)
 ```
 
@@ -162,7 +163,7 @@ print(df.index)
 
 Shows data types.
 
-```python id="uyc0p8"
+```python
 print(df.dtypes)
 ```
 
@@ -170,13 +171,11 @@ print(df.dtypes)
 
 # Viewing Data
 
----
-
 ## head()
 
 Shows first 5 rows.
 
-```python id="9f9eeu"
+```python
 print(df.head())
 ```
 
@@ -186,7 +185,7 @@ print(df.head())
 
 Shows last rows.
 
-```python id="1lj6zn"
+```python
 print(df.tail())
 ```
 
@@ -196,7 +195,7 @@ print(df.tail())
 
 Shows random rows.
 
-```python id="fby46u"
+```python
 print(df.sample(2))
 ```
 
@@ -204,17 +203,15 @@ print(df.sample(2))
 
 # Selecting Columns
 
----
-
 ## Single Column
 
-```python id="j6x5m4"
+```python
 print(df["Name"])
 ```
 
-Output:
+### Output
 
-```python id="ol3g0m"
+```text
 0    Laksh
 1    Aryan
 2    Parth
@@ -226,7 +223,7 @@ This returns a **Series**.
 
 ## Multiple Columns
 
-```python id="j3clpj"
+```python
 print(df[["Name", "Marks"]])
 ```
 
@@ -236,7 +233,7 @@ This returns another DataFrame.
 
 # Adding New Column
 
-```python id="ux3n1k"
+```python
 df["City"] = ["Mumbai", "Pune", "Delhi"]
 
 print(df)
@@ -246,7 +243,7 @@ print(df)
 
 # Updating Column Values
 
-```python id="4j0c2f"
+```python
 df["Marks"] = [95, 88, 99]
 ```
 
@@ -254,7 +251,7 @@ df["Marks"] = [95, 88, 99]
 
 # Deleting Columns
 
-```python id="mj71yz"
+```python
 df.drop("City", axis=1, inplace=True)
 ```
 
@@ -263,19 +260,17 @@ df.drop("City", axis=1, inplace=True)
 # Understanding axis
 
 | axis | Meaning |
-| ---- | ------- |
-| 0    | Rows    |
-| 1    | Columns |
+|------|---------|
+| 0 | Rows |
+| 1 | Columns |
 
 ---
 
 # Accessing Rows
 
----
+## loc[] → Label Based
 
-# loc[] → Label Based
-
-```python id="c3uhs8"
+```python
 print(df.loc[0])
 ```
 
@@ -283,9 +278,9 @@ Gets row with label/index 0.
 
 ---
 
-# iloc[] → Position Based
+## iloc[] → Position Based
 
-```python id="mv3d4z"
+```python
 print(df.iloc[1])
 ```
 
@@ -295,13 +290,13 @@ Gets second row.
 
 # Selecting Specific Rows & Columns
 
-```python id="rnyq0l"
+```python
 print(df.loc[0, "Name"])
 ```
 
-Output:
+### Output
 
-```python id="81pwlv"
+```text
 Laksh
 ```
 
@@ -309,11 +304,9 @@ Laksh
 
 # Filtering Data
 
----
-
 ## Students with Marks > 90
 
-```python id="szj6xz"
+```python
 print(df[df["Marks"] > 90])
 ```
 
@@ -321,7 +314,7 @@ print(df[df["Marks"] > 90])
 
 ## Multiple Conditions
 
-```python id="wdh2p5"
+```python
 print(df[(df["Marks"] > 85) & (df["Age"] > 20)])
 ```
 
@@ -329,11 +322,9 @@ print(df[(df["Marks"] > 85) & (df["Age"] > 20)])
 
 # Sorting Data
 
----
-
 ## Ascending
 
-```python id="pjlwmr"
+```python
 print(df.sort_values("Marks"))
 ```
 
@@ -341,7 +332,7 @@ print(df.sort_values("Marks"))
 
 ## Descending
 
-```python id="v8k3h9"
+```python
 print(df.sort_values("Marks", ascending=False))
 ```
 
@@ -349,41 +340,39 @@ print(df.sort_values("Marks", ascending=False))
 
 # Basic Information Functions
 
----
-
 ## info()
 
-```python id="z9kz0f"
+```python
 print(df.info())
 ```
 
 Shows:
 
-* Columns
-* Data types
-* Missing values
+- Columns
+- Data types
+- Missing values
 
 ---
 
 ## describe()
 
-```python id="wwd2j7"
+```python
 print(df.describe())
 ```
 
 Shows:
 
-* Mean
-* Count
-* Min
-* Max
-* Standard deviation
+- Mean
+- Count
+- Min
+- Max
+- Standard deviation
 
 ---
 
 # Renaming Columns
 
-```python id="vtby9j"
+```python
 df.rename(columns={"Marks": "Score"}, inplace=True)
 ```
 
@@ -391,25 +380,25 @@ df.rename(columns={"Marks": "Score"}, inplace=True)
 
 # Changing Index
 
-```python id="0u6zkn"
+```python
 df.set_index("Name", inplace=True)
 ```
 
-Output:
+### Output
 
-```python id="6c9v4s"
-        Age   Score
+```text
+        Age  Score
 Name
-Laksh   20      95
-Aryan   21      88
-Parth   22      99
+Laksh    20     95
+Aryan    21     88
+Parth    22     99
 ```
 
 ---
 
 # Reset Index
 
-```python id="x93k6h"
+```python
 df.reset_index(inplace=True)
 ```
 
@@ -419,18 +408,18 @@ df.reset_index(inplace=True)
 
 Real-world datasets often contain missing data.
 
-Example:
+### Example
 
-| Name  | Marks |
-| ----- | ----- |
-| Laksh | 90    |
-| Aryan | NaN   |
+| Name | Marks |
+|------|-------|
+| Laksh | 90 |
+| Aryan | NaN |
 
 ---
 
 # Detect Missing Values
 
-```python id="q8b9ri"
+```python
 print(df.isnull())
 ```
 
@@ -438,7 +427,7 @@ print(df.isnull())
 
 # Count Missing Values
 
-```python id="8x71it"
+```python
 print(df.isnull().sum())
 ```
 
@@ -446,7 +435,7 @@ print(df.isnull().sum())
 
 # Removing Missing Values
 
-```python id="9iwl1w"
+```python
 df.dropna()
 ```
 
@@ -454,7 +443,7 @@ df.dropna()
 
 # Filling Missing Values
 
-```python id="d2obzi"
+```python
 df.fillna(0)
 ```
 
@@ -462,11 +451,9 @@ df.fillna(0)
 
 # Saving DataFrame
 
----
-
 ## Save as CSV
 
-```python id="vx6hvk"
+```python
 df.to_csv("students.csv", index=False)
 ```
 
@@ -474,7 +461,7 @@ df.to_csv("students.csv", index=False)
 
 ## Save as Excel
 
-```python id="7cckgt"
+```python
 df.to_excel("students.xlsx", index=False)
 ```
 
@@ -482,11 +469,9 @@ df.to_excel("students.xlsx", index=False)
 
 # Reading Files
 
----
-
 ## CSV File
 
-```python id="r3o6ph"
+```python
 df = pd.read_csv("students.csv")
 ```
 
@@ -494,7 +479,7 @@ df = pd.read_csv("students.csv")
 
 ## Excel File
 
-```python id="tuw7ra"
+```python
 df = pd.read_excel("students.xlsx")
 ```
 
@@ -502,16 +487,19 @@ df = pd.read_excel("students.xlsx")
 
 # Real Life Example Workflow
 
-Suppose school gives you:
-`students.csv`
+Suppose a school gives you:
+
+```text
+students.csv
+```
 
 You can:
 
-1. Load file
-2. Clean data
+1. Load the file
+2. Clean the data
 3. Find toppers
-4. Calculate average
-5. Save report
+4. Calculate averages
+5. Save reports
 
 All using Pandas.
 
@@ -519,29 +507,27 @@ All using Pandas.
 
 # Difference Between Series & DataFrame
 
-| Series          | DataFrame        |
-| --------------- | ---------------- |
-| One-dimensional | Two-dimensional  |
-| Single column   | Multiple columns |
-| Simpler         | More powerful    |
+| Series | DataFrame |
+|---------|-----------|
+| One-dimensional | Two-dimensional |
+| Single column | Multiple columns |
+| Simpler | More powerful |
 
 ---
 
 # Common Beginner Mistakes
 
----
-
 ## 1. Forgetting `axis=1`
 
-Wrong:
+### Wrong
 
-```python id="77wd4w"
+```python
 df.drop("Marks")
 ```
 
-Correct:
+### Correct
 
-```python id="i8k6m0"
+```python
 df.drop("Marks", axis=1)
 ```
 
@@ -549,42 +535,55 @@ df.drop("Marks", axis=1)
 
 ## 2. Confusing `loc[]` and `iloc[]`
 
-| loc[]       | iloc[]         |
-| ----------- | -------------- |
+| loc[] | iloc[] |
+|--------|---------|
 | Label based | Position based |
 
 ---
 
 ## 3. Forgetting `inplace=True`
 
-Without it, changes may not save.
+Without it, changes may not be saved.
 
 ---
 
 # Mini Project Idea
 
-Create:
-
 ## Student Management System
 
-Features:
+### Features
 
-* Add students
-* Filter toppers
-* Calculate average
-* Save reports
+- Add students
+- Filter toppers
+- Calculate averages
+- Save reports
 
 ---
 
 # Summary
 
 You learned:
-✅ What is DataFrame
-✅ Creating DataFrame
+
+✅ What is a DataFrame
+
+✅ Creating a DataFrame
+
 ✅ Rows & Columns
+
 ✅ Selecting data
+
 ✅ Filtering
+
 ✅ Sorting
+
 ✅ Missing values
-✅ Reading/Saving files
-✅ loc[] and iloc[]
+
+✅ Reading and Saving files
+
+✅ `loc[]` and `iloc[]`
+
+---
+
+# Key Takeaway
+
+A **DataFrame** is the most important data structure in Pandas. Almost every data analysis, machine learning, and data cleaning task starts with loading data into a DataFrame and manipulating it efficiently.
