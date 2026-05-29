@@ -533,14 +533,23 @@ Using pivot table without numeric values.
 You learned:
 
 ✅ pivot_table()
+
 ✅ values
+
 ✅ index
+
 ✅ columns
+
 ✅ aggfunc
+
 ✅ Multiple aggregations
+
 ✅ Crosstab
+
 ✅ Frequency tables
+
 ✅ Percentages
+
 ✅ Report generation
 
 ---
